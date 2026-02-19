@@ -49,3 +49,60 @@ const songs = [
 const onlyTrue = songs.filter(tr => tr.premium);
 console.log(onlyTrue);
 
+// ---------------------- // 
+
+// ANOTHER CHALLENGES FOR .MAP, .FILTER, .REDUCE // 
+
+const numbers = [1, 2, 3, 4, 5];
+
+// Task: Use map to create a new array of squares
+// Expected output: [1, 4, 9, 16, 25]
+
+const multiByItself = numbers.map(mul => mul * mul );
+console.log(multiByItself);
+
+
+// FILTER // 
+
+const people = [
+  { name: "Alice", age: 17 },
+  { name: "Bob", age: 22 },
+  { name: "Charlie", age: 15 },
+  { name: "David", age: 30 }
+];
+
+// Task: Use filter to get people who are 18 or older
+// Expected output: [
+//   { name: "Bob", age: 22 },
+//   { name: "David", age: 30 }
+// ]
+
+const older = people.filter(old => old.age >= 18);
+console.log(older);
+
+// REDUCE // 
+
+const cart = [
+  { item: "Shirt", price: 20 },
+  { item: "Pants", price: 30 },
+  { item: "Hat", price: 10 }
+];
+
+// Task: Use reduce to calculate the total price
+// Expected output: 60
+
+const total = cart.reduce((total, itm) => total + itm.price, 0);
+console.log(total);
+
+// BONUS // 
+
+const arr = [[1,2], [3,4], [5]];
+// Expected output: [1,2,3,4,5]
+
+
+const flattened = arr.reduce((flat, nums) => {
+    return flat.concat(nums);
+});
+
+console.log(flattened);
+
