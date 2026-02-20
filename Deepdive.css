@@ -1,0 +1,28 @@
+.sciFi {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+}
+
+.hmm {
+    display: flex;
+    gap: 10px;
+}
+
+.fave {
+    display: block;
+}
+
+.expName {
+    display: flex;
+    gap: 145px;
+}
+.para {
+    display: flex;
+    gap: 10px;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: black;
+}

@@ -1,3 +1,4 @@
+/*
 // ES6 CHALLENGE // 
 
 // CHALLENGE 1, ARROW FUNCTION + TEMPLATE LITERAL // 
@@ -169,7 +170,7 @@ Filter Sci-Fi movies
 Map to titles
 Find the title that includes "Inter"
 Reduce to count total letters in that title
-*/
+
 
 const movieTit = movies.filter(m => m.title);
 console.log(movieTit);
@@ -180,4 +181,184 @@ console.log(titlesMap);
 const interInTitle = movies.find(inter => inter.title.startsWith('Inter'));
 console.log(interInTitle);
 
-const red = movies.reduce()
+
+
+// REFRESHER - CREATE SMALL PROJECT, USING .MAP, .FILTER, .FIND, .REDUCE // 
+
+const mvs = [
+  { id: 1, title: "Inception", year: 2010, rating: 8.8, genre: "Sci-Fi" },
+  { id: 2, title: "Interstellar", year: 2014, rating: 8.6, genre: "Sci-Fi" },
+  { id: 3, title: "The Dark Knight", year: 2008, rating: 9.0, genre: "Action" },
+  { id: 4, title: "Tenet", year: 2020, rating: 7.5, genre: "Sci-Fi" },
+  { id: 5, title: "Joker", year: 2019, rating: 8.5, genre: "Drama" },
+  { id: 6, title: "Avengers: Endgame", year: 2019, rating: 8.4, genre: "Action" },
+];
+
+
+    
+
+    const lists = document.querySelector('.movieList');
+        mvs.forEach((movie) => {
+        const liElem = document.createElement('div');
+        liElem.className = 'hmm'
+        liElem.innerHTML = 
+        `
+        <p>Movie title: '${movie.title}'</p>
+        <p>Rate: ${movie.rating}</p>
+        <button class="add" onclick="faveMov('${movie.title}')">Add to favorite</button>
+        `;
+        lists.appendChild(liElem);
+
+        const recommended = mvs.filter(rec => rec.genre === 'Sci-Fi');
+        console.log(recommended);
+
+        const filtered = recommended.map(fil => fil.title);
+        console.log(filtered);
+
+        document.querySelector('.sciFi').innerHTML = filtered;
+    })
+
+    function faveMov(title){
+        const faveMovie = mvs.find(f => f.title === title);
+
+        const faveElem = document.querySelector('.fave');
+        
+        const elem = document.createElement('li');
+        elem.innerHTML = '';
+
+        if(faveMovie){
+        elem.innerHTML = `
+        ${faveMovie.title} ${faveMovie.rating}
+        <button onclick="removeMovies(${faveMovie.id})">Remove</button>`
+        };
+        faveElem.appendChild(elem);
+    }
+
+*/
+
+// REFRESHER, EXPENSE TRACKER // 
+/*
+let expenses = [];
+
+
+function renderExp(){
+const expList = document.querySelector('.expenseList')
+expList.innerHTML = '';
+
+expenses.forEach((exp) => {
+    const expense = document.createElement('div');
+    expense.className = 'expName'
+    expense.innerHTML = 
+    `
+    <p>${exp.name}</p>
+    <p>${exp.amount}</p>
+    <p>${exp.category}</p>
+    <button onclick="rem(${exp.id})">Remove</button>
+    `;
+    expList.appendChild(expense);
+})
+}
+
+function updateSum(){
+    const tot = expenses.reduce((cat, amt) => cat + amt.amount, 0);
+    document.querySelector('.total').innerHTML = `Total: ${tot}`
+
+    const hghstExp = expenses.reduce((h, amt) => {
+        return h > amt ? h : amt;
+    }, 0)
+    
+    document.querySelector('.highest').innerHTML = `Highest expense: ${hghstExp.amount}`;
+
+    const length = expenses.reduce((l, len) => l + len.amount / expenses.length, 0)
+
+    let total = length;
+
+    document.querySelector('.average').innerHTML = `Average: ${total}`;
+}
+
+function add(){
+    const inputName = document.querySelector('.expenseName').value;
+    const inputAmount = document.querySelector('.expenseAmount').value;
+
+    const cate = document.querySelector('.cate').value;
+
+    if(inputName === '' || inputAmount <= 0 || !cate){
+        return;
+    }
+
+    const newExp = {
+        id: Date.now(),
+        name: inputName,
+        amount: Number(inputAmount),
+        category: cate
+    };
+
+    expenses.push(newExp);
+
+    renderExp();
+    updateSum();
+}
+
+function rem(id){
+    expenses = expenses.filter(r => r.id !== id);
+    renderExp();
+    updateSum();
+}
+
+// 
+*/
+// REFRESH FUNCTION, LOOPS, .FIND, ,.FILTER, DOM , TEMPLATE STRING, 
+/*
+let todos = [];
+
+function addTask(){
+   const todoElem = document.querySelector('.whatToDo');
+
+    const whatTask = todoElem.value;
+    if(whatTask === ''){
+        alert('Please input todo!')
+        return;
+    }
+
+    const newTask = {
+        id: Date.now(),
+        todo: whatTask,
+        completed: false,
+    }
+
+    todos.push(newTask);
+    todoElem.value = '';
+    renderTask();
+}
+
+function renderTask(){
+    const lists = document.querySelector('.listHere');
+    lists.innerHTML = '';
+
+    todos.forEach((td) => {
+    const inpDiv = document.createElement('div');
+    inpDiv.innerHTML = 
+    `
+    <div class="para">
+        <div class="par ${td.completed ? 'completed' : ''}">${td.todo}</div>
+        <button class="" onclick="toggleCom(${td.id})">${td.completed ? 'Undo' : 'Completed'}</button>
+        <button onclick="deleteTask(${td.id})">Remove</button>
+    </div>
+    `;
+    lists.appendChild(inpDiv);
+    });
+}
+
+function deleteTask(id){
+    todos = todos.filter(d => d.id !== id);
+    renderTask();
+}
+
+function toggleCom(id){
+    const tog = todos.find(t => t.id === id);
+    if(tog){
+        tog.completed = !tog.completed;
+        renderTask();
+    }
+}
+*/
