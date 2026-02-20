@@ -362,3 +362,43 @@ function toggleCom(id){
     }
 }
 */
+// REFRESHER FOR LOGIN FORM. 
+/*
+let cred = JSON.parse(localStorage.getItem('acc')) || [];
+
+function logIn(){
+    const inpName = document.querySelector('.name');
+    const inpPass = document.querySelector('.pass');
+
+    const userElem = inpName.value;
+    const userPass = inpPass.value;
+
+    if(userElem === '' || userPass === ''){
+        alert('Please enter name and password.')
+        return;
+    }
+
+    const existAcc = cred.find(e => e.userName === userElem && e.pass === userPass);
+
+    if(!existAcc){
+        alert('User not found')
+    } else {
+        alert('Succesfully log in')
+    }
+}
+
+function addAcc(){
+
+    const createAcc = document.querySelector('.newAccName');
+    const createPass = document.querySelector('.newAccPass');
+
+    const whatName = createAcc.value;
+    const whatPass = createPass.value;
+
+    cred.push({
+        userName: whatName,
+        pass: whatPass
+    });
+    localStorage.setItem('acc', JSON.stringify(cred));
+}
+*/
