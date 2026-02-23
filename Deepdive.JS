@@ -386,6 +386,7 @@ function logIn(){
         alert('Succesfully log in')
     }
 }
+*/
 
 function addAcc(){
 
@@ -395,10 +396,70 @@ function addAcc(){
     const whatName = createAcc.value;
     const whatPass = createPass.value;
 
-    cred.push({
-        userName: whatName,
-        pass: whatPass
-    });
-    localStorage.setItem('acc', JSON.stringify(cred));
+    const existCre = cred.find(e => e.userName === whatName);
+    if(existCre){
+        alert('Username already exist')
+    } else {
+        cred.push({
+            userName: whatName,
+            pass: whatPass
+        });
+        localStorage.setItem('acc', JSON.stringify(cred));
+        createAcc.value = '';
+        createPass.value = '';
+    }
 }
-*/
+
+// ASYNC AND AWAIT FEATURES // 
+
+let cred = JSON.parse(localStorage.getItem('acc')) || [];
+
+function fakeLogIn(userElem, userPass){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const credentials = JSON.parse(localStorage.getItem('acc')) || [];
+
+            const user = credentials.find(u => u.userName === userElem.trim() && u.pass === userPass.trim());
+
+            if(!user){
+                reject('Invalid user!')
+            } else {
+                resolve({
+                    message: 'Successfully logged in',
+                    token: 'fake-jwt-token-123'
+                });
+            }
+        }, 2000);
+    });
+}
+
+async function logIn() {
+
+    const inpName = document.querySelector('.name');
+    const inpPass = document.querySelector('.pass');
+
+    const userElem = inpName.value.trim();
+    const userPass = inpPass.value.trim();
+
+    if(!userElem || !userPass){
+        alert('Please enter name and password')
+        return;
+    }
+
+    const loadingElem = document.querySelector('.loading');
+    loadingElem.style.display = 'block';
+
+    try {
+        console.log('Logging in...');
+        const res = await fakeLogIn(userElem, userPass);
+        console.log(res.message);
+        localStorage.setItem('token', res.token);
+        alert(res.message)
+    } catch (error){
+        console.log(error);
+        alert(error);
+    } finally {
+        console.log('Log in request finished!');
+        loadingElem.style.display = 'none'
+    }
+};
