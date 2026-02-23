@@ -387,7 +387,7 @@ function logIn(){
     }
 }
 */
-
+/*
 function addAcc(){
 
     const createAcc = document.querySelector('.newAccName');
@@ -409,6 +409,7 @@ function addAcc(){
         createPass.value = '';
     }
 }
+*/
 
 // ASYNC AND AWAIT FEATURES // 
 
@@ -452,7 +453,6 @@ async function logIn() {
     try {
         console.log('Logging in...');
         const res = await fakeLogIn(userElem, userPass);
-        console.log(res.message);
         localStorage.setItem('token', res.token);
         alert(res.message)
     } catch (error){
@@ -463,3 +463,53 @@ async function logIn() {
         loadingElem.style.display = 'none'
     }
 };
+
+// APPLY ASYNC AND AWAIT IN MY ADDING ACC LOGIN FORM CODE.// 
+
+function newRegister(whatName, whatPass){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            let cred = JSON.parse(localStorage.getItem('acc')) || [];
+
+            const newUser = cred.find(n => n.userName === whatName);
+
+            if(newUser){
+                reject('Username already exist')
+                const createHere = document.querySelector('.create');
+                createHere.innerHTML = '';
+            } else {
+                cred.push({
+                    userName: whatName,
+                    pass: whatPass
+                });
+                localStorage.setItem('acc', JSON.stringify(cred));
+                resolve('Account created successfully.')
+                const createHere = document.querySelector('.create');
+                createHere.innerHTML = '';
+            }
+        }, 3000);
+    });
+}
+
+async function addAcc() {
+    const inpName = document.querySelector('.newAccName');
+    const inpPass = document.querySelector('.newAccPass');
+    
+    const whatName = inpName.value.trim();
+    const whatPass = inpPass.value.trim();
+
+    if(!whatName || !whatPass){
+        alert('Please enter username and password');
+        return;
+    }
+
+    try {
+        const create = document.querySelector('.create');
+        create.innerHTML = `Creating an account...`
+        const res = await newRegister(whatName, whatPass);
+        alert(res);
+    } catch (error) {
+        alert(error);
+    }
+}
+
