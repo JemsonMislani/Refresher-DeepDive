@@ -538,3 +538,25 @@ fetch('https://jsonplaceholder.typicode.com/posts', {
 .catch(function(error){
     console.log(error);
 })
+
+
+async function addPost(){
+    try {
+        const tryAsync = await fetch('https://jsonplaceholder.typicode.com/posts', { 
+            method: 'POST', // Magsesend ng POST request sa fake API. 
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({ // Ipapasa ang JSON object 
+                title: 'Try async function',
+                body: 'My first async function',
+                userId: 1
+            })
+        });
+        const data = await tryAsync.json(); // Babalik ang API ng tryAsync JSON na may id na automatically (id: 101).
+        console.log('Server Response:', data); // Lalabas sa console.log.
+    } catch (error){
+        console.error('Error:', error); // Lalabas ang error kung meron man. 
+    }
+}
+addPost();
