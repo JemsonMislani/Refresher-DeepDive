@@ -560,3 +560,18 @@ async function addPost(){
     }
 }
 addPost();
+
+// MANIPULATE IMG // 
+fetch('https://images.pexels.com/photos/1070534/pexels-photo-1070534.jpeg?cs=srgb&dl=pexels-steve-1070534.jpg&fm=jpg')
+.then(response => {
+    console.log(response);
+    return response.blob();
+})
+.then(blob => {
+    console.log(blob);
+    const img = document.querySelector('.exImg');
+    img.src = URL.createObjectURL(blob);
+    img.style.height = '400px';
+    img.style.width = 'auto';
+});
+
