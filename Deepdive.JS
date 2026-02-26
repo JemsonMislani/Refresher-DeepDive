@@ -513,7 +513,7 @@ async function addAcc() {
     }
 }
 
-*/
+
 
 // FETCH METHOD DEEP DIVE, POST REQUEST// 
 
@@ -574,4 +574,38 @@ fetch('https://images.pexels.com/photos/1070534/pexels-photo-1070534.jpeg?cs=srg
     img.style.height = '400px';
     img.style.width = 'auto';
 });
+*/
 
+// FAKE ACC REGISTER USING FETCH // 
+
+async function fakeRegister() {
+    const inpName = document.querySelector('.username');
+    const inpPass = document.querySelector('.password');
+
+    const user = inpName.value.trim();
+    const pass = inpPass.value.trim();
+
+    if(!user || !pass){
+        alert('Enter username and password')
+        return;
+    }
+
+    try {
+        const output = await fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify({
+                user,
+                pass,
+            })
+        })
+        const data = await output.json();
+        console.log('Server response:', data)
+        document.querySelector('.result').innerHTML = 
+        `Successfully created: User ${user} your ID#: ${data.id}`;
+        inpName.value = '';
+        inpPass.value = '';
+    } catch (error){
+        console.error(error);
+    }
+}
