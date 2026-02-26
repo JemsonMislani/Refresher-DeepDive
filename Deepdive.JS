@@ -409,7 +409,7 @@ function addAcc(){
         createPass.value = '';
     }
 }
-*/
+
 
 // ASYNC AND AWAIT FEATURES // 
 
@@ -513,3 +513,28 @@ async function addAcc() {
     }
 }
 
+*/
+
+// FETCH METHOD DEEP DIVE, POST REQUEST// 
+
+fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    body: JSON.stringify({
+        title: 'Jemson Mislani',
+        body: 'My first fetch code',
+        userId: 1
+    }),
+    headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+    }
+})
+
+.then(function(response){
+    return response.json();
+})
+.then(function(data){
+    console.log(data);
+})
+.catch(function(error){
+    console.log(error);
+})
