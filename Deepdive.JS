@@ -631,7 +631,9 @@ function logInCredentials(user, pass){
                     token: 'fake-token-111'
                 })
             } else {
-                reject('Invalid account')
+                reject({
+                    message: 'Invalid account'
+                })
             }
         }, 2000)
     })
@@ -652,17 +654,16 @@ async function logInButton() {
     const butt = document.querySelector('.logIn');
     butt.disabled = true;
     butt.innerHTML = 'Logging...'
-
+    const out = document.querySelector('.output');
     loadingElem();
-
+    showLoad();
     try{
         const output = await logInCredentials(inpUser, inpPass);
-        alert(output.message);
-        userEl.value = '';
-        userPassEl.value = '';
+        out.innerHTML = output.message;
         localStorage.setItem('token', output.token);
     } catch (error){
-        alert(error);
+        out.innerHTML = error.message;
+        userEl.focus();
     } finally {
         butt.disabled = false;
         butt.innerHTML = 'Login'
@@ -686,7 +687,7 @@ async function logInButton() {
         await new Promise((resolve) => {
             setTimeout(() => {
                 resolve();
-            }, 1900)
+            }, 2000)
         })
             hideLoad();
     }
