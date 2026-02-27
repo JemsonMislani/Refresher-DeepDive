@@ -649,6 +649,10 @@ async function logInButton() {
         return;
     }
     
+    const butt = document.querySelector('.logIn');
+    butt.disabled = true;
+    butt.innerHTML = 'Logging...'
+
     try{
         const output = await logInCredentials(inpUser, inpPass);
         alert(output.message);
@@ -657,5 +661,10 @@ async function logInButton() {
         localStorage.setItem('token', output.token);
     } catch (error){
         alert(error);
+    } finally {
+        butt.disabled = false;
+        butt.innerHTML = 'Login'
+        userEl.value = '';
+        userPassEl.value = '';
     }
 }
