@@ -577,7 +577,7 @@ fetch('https://images.pexels.com/photos/1070534/pexels-photo-1070534.jpeg?cs=srg
 */
 
 // FAKE ACC REGISTER USING FETCH // 
-
+/*
 async function fakeRegister() {
     const inpName = document.querySelector('.username');
     const inpPass = document.querySelector('.password');
@@ -607,5 +607,55 @@ async function fakeRegister() {
         inpPass.value = '';
     } catch (error){
         console.error(error);
+    }
+}
+*/
+// REFRESH FAKE LOGIN USING FETCH //
+
+let accounts = [{
+    userName: 'Jemson',
+    userPass: '123'
+},{
+    userName: 'Ivy',
+    userPass: '321'
+}]
+
+function logInCredentials(user, pass){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const acc = accounts.find(a => a.userName === user && a.userPass === pass)
+
+            if(acc){
+                resolve({
+                    message: 'Successfully login',
+                    token: 'fake-token-111'
+                })
+            } else {
+                reject(new Error('Invalid account'))
+            }
+        }, 2000)
+    })
+}
+
+async function logInButton() {
+    const userEl = document.querySelector('.user');
+    const userPassEl = document.querySelector('.pass');
+
+    const inpUser = userEl.value.trim();
+    const inpPass = userPassEl.value.trim();
+
+    if(!inpUser || !inpPass){
+        alert('Enter credentials.')
+        return;
+    }
+    
+    try{
+        const output = await logInCredentials(inpUser, inpPass);
+        alert(output.message);
+        userEl.value = '';
+        userPassEl.value = '';
+        localStorage.setItem('token', output.token);
+    } catch (error){
+        alert(error);
     }
 }
