@@ -26,3 +26,21 @@
     text-decoration: line-through;
     color: black;
 }
+
+.spinner {
+    border: 1px solid black;
+    height: 20px;
+    width: 20px;
+    border: 5px solid rgb(139, 139, 139);
+    border-top: 5px solid rgb(0, 0, 0);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.hidden {
+    display: none;
+}

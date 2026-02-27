@@ -631,7 +631,7 @@ function logInCredentials(user, pass){
                     token: 'fake-token-111'
                 })
             } else {
-                reject(new Error('Invalid account'))
+                reject('Invalid account')
             }
         }, 2000)
     })
@@ -653,6 +653,8 @@ async function logInButton() {
     butt.disabled = true;
     butt.innerHTML = 'Logging...'
 
+    loadingElem();
+
     try{
         const output = await logInCredentials(inpUser, inpPass);
         alert(output.message);
@@ -668,3 +670,25 @@ async function logInButton() {
         userPassEl.value = '';
     }
 }
+// LOADING SPINNER FAETURE // 
+
+    const load = document.querySelector('.spinner');
+    function showLoad(){
+        load.classList.remove('hidden')
+    }
+    
+    function hideLoad(){
+        load.classList.add('hidden')
+    }
+
+    async function loadingElem(){
+        showLoad();
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                resolve();
+            }, 1900)
+        })
+            hideLoad();
+    }
+    loadingElem();
+    
