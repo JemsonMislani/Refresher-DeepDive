@@ -690,5 +690,4 @@ async function logInButton() {
         })
             hideLoad();
     }
-    loadingElem();
     
